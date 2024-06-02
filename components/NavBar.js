@@ -67,13 +67,13 @@ const Navbar = ({ logoSource, onMenuPress }) => {
                 <Text style={styles.linkHome}>HOME</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => {
-                navigation.navigate('Quem Somos');
+                navigation.navigate('QuemSomos');
                 setMenuVisible(false);
               }}>
                 <Text style={styles.menuItem}>QUEM SOMOS</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => {
-                navigation.navigate('Parte');
+                navigation.navigate('FacaParte');
                 setMenuVisible(false);
               }}>
                 <Text style={styles.menuItem}>FAÇA PARTE</Text>
