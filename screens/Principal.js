@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text} from 'react-native';
+import { View} from 'react-native';
 import Navbar from '../components/NavBar';
 import CustomCarousel from '../components/Carousel';
 import { useNavigation } from '@react-navigation/native';
@@ -14,7 +14,7 @@ const Principal = () => {
 
   return (
     <View style={{ flex: 1 }}>
-      <Navbar logoSource={require('../assets/Logo1.png')} />
+      <Navbar logoSource={require('../assets/logos/Logo1.png')} />
       <View style={styles.container}>
         <CustomCarousel handleCadastro={handleCadastro} />
       </View>

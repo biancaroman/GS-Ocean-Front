@@ -18,18 +18,18 @@ const CarouselItem = ({ item, handleCadastro }) => (
 export default function CustomCarousel ({ handleCadastro }) {
   const carouselItems = [
     {
-      background: require('../assets/background1.jpg'),
-      logo: require('../assets/Logo2.png'),
+      background: require('../assets/background/background1.jpg'),
+      logo: require('../assets/logos/Logo2.png'),
       text: 'Bem-vindo ao Oceano Vivo: \n A tecnologia que protege a vida marinha.',
     },
     {
-      background: require('../assets/background2.jpg'),
-      logo: require('../assets/Logo2.png'),
+      background: require('../assets/background/background2.jpg'),
+      logo: require('../assets/logos/Logo2.png'),
       text: 'Junte-se a LeadTech na missão de proteger nossos oceanos.',
     },
     {
-      background: require('../assets/background3.jpg'),
-      logo: require('../assets/Logo2.png'),
+      background: require('../assets/background/background3.jpg'),
+      logo: require('../assets/logos/Logo2.png'),
       text: 'Junte-se a LeadTech na missão de proteger nossos oceanos.',
     },
   ];
