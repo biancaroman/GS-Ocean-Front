@@ -9,6 +9,16 @@ import CadastroOngs from './screens/CadastroOngs';
 import Contato from './screens/linksNav/Contato';
 import FacaParte from './screens/linksNav/FacaParte';
 import QuemSomos from './screens/linksNav/QuemSomos';
+import PrincipalUsuario from './screens/pagsUsuario/principalUsuario';
+import PrincipalOngs from './screens/pagsOngs/principalOngs';
+import PrincipalAdm from './screens/pagsAdm/principalAdm';
+import Administracao from './screens/linksNavPrincipal/administracao';
+import Blog from './screens/linksNavPrincipal/blog';
+import Dashboard from './screens/linksNavPrincipal/dashboard';
+import EspeciesAmeacadas from './screens/linksNavPrincipal/especiesAmeacadas';
+import Geolocalizacao from './screens/linksNavPrincipal/geolocalizacao';
+import IdentificacaoEspecies from './screens/linksNavPrincipal/identificacaoEspecies';
+import Relatorios from './screens/linksNavPrincipal/relatorios';
 
 const Stack = createStackNavigator();
 
@@ -55,6 +65,56 @@ export default function App() {
           name="QuemSomos"
           component={QuemSomos}
           options={{ title: 'QuemSomos', headerShown: false }} 
+        />
+        <Stack.Screen
+          name="PrincipalUsuario"
+          component={PrincipalUsuario}
+          options={{ title: 'PrincipalUsuario', headerShown: false }} 
+        />
+        <Stack.Screen
+          name="PrincipalOngs"
+          component={PrincipalOngs}
+          options={{ title: 'PrincipalOngs', headerShown: false }} 
+        />
+        <Stack.Screen
+          name="PrincipalAdm"
+          component={PrincipalAdm}
+          options={{ title: 'PrincipalAdm', headerShown: false }} 
+        />
+        <Stack.Screen
+          name="Administracao"
+          component={Administracao}
+          options={{ title: 'Administracao', headerShown: false }} 
+        />
+        <Stack.Screen
+          name="Blog"
+          component={Blog}
+          options={{ title: 'Blog', headerShown: false }} 
+        />
+        <Stack.Screen
+          name="Dashboard"
+          component={Dashboard}
+          options={{ title: 'Dashboard', headerShown: false }} 
+        />
+        <Stack.Screen
+          name="EspeciesAmeacadas"
+          component={EspeciesAmeacadas}
+          options={{ title: 'EspeciesAmeacadas', headerShown: false }} 
+        />
+        <Stack.Screen
+          name="Geolocalizacao"
+          component={Geolocalizacao}
+          options={{ title: 'Geolocalizacao', headerShown: false }} 
+        />
+        <Stack.Screen
+          name="IdentificacaoEspecies"
+          component={IdentificacaoEspecies}
+          options={{ title: 'IdentificacaoEspecies', headerShown: false }} 
+        />
+        <Stack.Screen
+          name="Relatorios"
+          component={Relatorios}
+          options={{ title: 'Relatorios', headerShown: false }} 
         />
       </Stack.Navigator>
     </NavigationContainer>
