@@ -1,8 +1,8 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, ImageBackground } from 'react-native';
 import Navbar from '../../components/NavBarPrincipal';
 
-export default function PrincipalUsuario(){
+export default function PrincipalUsuario() {
 
     const showLinks = {
         identificarEspecies: true,
@@ -11,104 +11,49 @@ export default function PrincipalUsuario(){
         administração: false
     };
 
-  const ultimasDeteccoes = [
-    {
-      especie: 'Tubarão-branco',
-      localizacao: 'Latitude: -25.274398, Longitude: 133.775136',
-      data: '01/06/2024'
-    },
-    {
-      especie: 'Baleia-azul',
-      localizacao: 'Latitude: 37.774929, Longitude: -122.419416',
-      data: '30/05/2024'
-    }
-  ];
-
-  return (
-    <View style={{flex:1}}> 
-        <Navbar logoSource={require('../../assets/logos/Logo2.png')} showLinks={showLinks} />
-        <ScrollView style={styles.container}>
-        <View style={styles.header}>
-            <Text style={styles.headerText}>Últimas Detecções</Text>
-            {ultimasDeteccoes.map((detecao, index) => (
-            <View key={index} style={styles.detecao}>
-                <Text style={styles.especie}>{detecao.especie}</Text>
-                <Text style={styles.localizacao}>{detecao.localizacao}</Text>
-                <Text style={styles.data}>{detecao.data}</Text>
-            </View>
-            ))}
-            <TouchableOpacity style={styles.button}>
-            <Text style={styles.buttonText}>Ver todas as detecções</Text>
-            </TouchableOpacity>
+    return (
+        <View style={{flex: 1}}>
+            <Navbar logoSource={require('../../assets/logos/Logo2.png')} showLinks={showLinks} />
+            <ImageBackground source={require('../../assets/background/backgroundUsuario.jpg')} style={styles.background}>
+                <View style={styles.container}>
+                    <Text style={styles.title}>Bem-vindo Usuário</Text>
+                    <Text style={styles.paragraph}>
+                       O aplicativo Oceano Vivo utiliza inteligência artificial para identificar espécies marinhas automaticamente através de fotos capturadas.
+                        Ajude a monitorar a biodiversidade marinha e contribua para a conservação das espécies ameaçadas.
+                    </Text>
+                    <Text style={styles.paragraph}>
+                        Funcionalidades Principais:
+                        {'\n'}- Identificação automática de espécies marinhas.
+                        {'\n'}- Monitoramento de espécies em risco de extinção.
+                        {'\n'}- Detecção rápida de espécies invasoras.
+                    </Text>
+                </View>
+            </ImageBackground>
         </View>
-
-        <View style={styles.section}>
-            <Text style={styles.sectionText}>Funcionalidades</Text>
-            <TouchableOpacity style={styles.button}>
-            <Text style={styles.buttonText}>Identificação de Espécies</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.button}>
-            <Text style={styles.buttonText}>Relatórios</Text>
-            </TouchableOpacity>
-        </View>
-        </ScrollView>
-    </View>
-  );
-};
+    );
+}
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#f5f5f5',
-  },
-  header: {
-    backgroundColor: '#fff',
-    padding: 20,
-    margin: 20,
-    borderRadius: 8,
-    boxShadow: '0 0 10px rgba(0,0,0,0.1)',
-  },
-  headerText: {
-    fontSize: 20,
-    color: '#333',
-    marginBottom: 10,
-  },
-  detecao: {
-    marginBottom: 10,
-  },
-  especie: {
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  localizacao: {
-    fontSize: 14,
-  },
-  data: {
-    fontSize: 14,
-    color: '#666',
-  },
-  button: {
-    backgroundColor: '#007bff',
-    padding: 10,
-    borderRadius: 8,
-    alignItems: 'center',
-    marginTop: 10,
-  },
-  buttonText: {
-    color: '#fff',
-    fontSize: 16,
-  },
-  section: {
-    backgroundColor: '#fff',
-    padding: 20,
-    margin: 20,
-    borderRadius: 8,
-    boxShadow: '0 0 10px rgba(0,0,0,0.1)',
-  },
-  sectionText: {
-    fontSize: 20,
-    color: '#333',
-    marginBottom: 10,
-  }
-});
+    background: {
+        flex: 1,
+        
+    },
+    container: {
+        flex: 1,
+        padding: 20,
 
+        backgroundColor: 'rgba(0, 0, 0, 0.3)',
+        
+    },
+    title: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        marginBottom: 30,
+        color: 'white'
+    },
+    paragraph: {
+        fontSize: 16,
+        marginBottom: 50,
+        color: 'white'
+    },
+});

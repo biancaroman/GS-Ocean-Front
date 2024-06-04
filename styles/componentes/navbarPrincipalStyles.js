@@ -4,8 +4,6 @@ export const styles = StyleSheet.create({
   container: {
     padding: 40,
     backgroundColor: '#1A183F',
-    borderBottomWidth: 1,
-    borderBottomColor: 'white',
   },
   logoContainer: {
     flexDirection: 'row',

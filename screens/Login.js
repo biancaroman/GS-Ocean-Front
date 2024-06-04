@@ -24,8 +24,8 @@ export default function Login() {
             if (resposta.ok) {
                 navigation.navigate('Principal');
             } else {
-                if (dados.mensagem === 'UsuÃ¡rio nÃ£o encontrado') {
-                    ToastAndroid.show('UsuÃ¡rio nÃ£o cadastrado', ToastAndroid.SHORT);
+                if (dados.mensagem === 'Usuário não encontrado') {
+                    ToastAndroid.show('Usuário não cadastrado', ToastAndroid.SHORT);
                 } else {
                     ToastAndroid.show(dados.mensagem, ToastAndroid.SHORT);
                 }
@@ -36,7 +36,7 @@ export default function Login() {
     };
 
     const handleCadastro = () => {
-        navigation.navigate('Cadastro');
+        navigation.navigate('PrincipalUsuario');
     };
 
     const esqueceuSenha = () => {
