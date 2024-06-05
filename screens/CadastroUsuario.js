@@ -3,6 +3,7 @@ import { View, Text, TextInput, TouchableOpacity, ImageBackground, ToastAndroid 
 import { useNavigation } from '@react-navigation/native';
 import { styles } from '../styles/telas/cadastrouserStyles.js';
 import axios from 'axios';
+import Icon from 'react-native-vector-icons/MaterialIcons'; 
 
 export default function CadastroUsuario() {
   const [nome, setNome] = useState('');
@@ -76,7 +77,10 @@ export default function CadastroUsuario() {
   };
 
   return (
-    <ImageBackground source={require('../assets/background/backgroundCadastroUsuario.jpg')} style={styles.backgroundImage}>
+    <ImageBackground source={require('../assets/background/cadastroUsuarios.jpg')} style={styles.backgroundImage}>
+       <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+        <Icon name="arrow-back" size={30} color="#fff" />
+      </TouchableOpacity>
       <View style={styles.containerTitle}>
         <Text style={styles.title}>Realizar Cadastro</Text>
       </View>

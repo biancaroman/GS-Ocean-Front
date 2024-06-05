@@ -19,6 +19,7 @@ import EspeciesAmeacadas from './screens/linksNavPrincipal/especiesAmeacadas';
 import Geolocalizacao from './screens/linksNavPrincipal/geolocalizacao';
 import IdentificacaoEspecies from './screens/linksNavPrincipal/identificacaoEspecies';
 import Relatorios from './screens/linksNavPrincipal/relatorios';
+import PerfilUsuario from './screens/linksNavPrincipal/perfilUsuario';
 
 const Stack = createStackNavigator();
 
@@ -115,6 +116,11 @@ export default function App() {
           name="Relatorios"
           component={Relatorios}
           options={{ title: 'Relatorios', headerShown: false }} 
+        />
+        <Stack.Screen
+          name="PerfilUsuario"
+          component={PerfilUsuario}
+          options={{ title: 'PerfilUsuario', headerShown: false }} 
         />
       </Stack.Navigator>
     </NavigationContainer>

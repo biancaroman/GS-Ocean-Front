@@ -13,14 +13,14 @@ export const styles = StyleSheet.create({
       paddingHorizontal: 20,
     },
     containerTitle: {
-      flex: 0.16,
+      flex: 0.28,
       justifyContent: 'flex-end',
       alignItems: 'center',
       paddingHorizontal: 50,
       marginBottom: 30,
     },
     title: {
-      fontSize: 28,
+      fontSize: 24,
       fontWeight: '900',
       color: 'white',
     },
@@ -32,7 +32,7 @@ export const styles = StyleSheet.create({
     },
     label: {
       color: 'white',
-      fontSize: 20,
+      fontSize: 18,
     },
     input: {
       backgroundColor: 'rgba(255, 255, 255, 0.8)',
@@ -58,7 +58,7 @@ export const styles = StyleSheet.create({
 
     texto: {
       color: 'white',
-      fontSize: 18,
+      fontSize: 14,
       marginTop: 10, 
     },
     recomendacoes: {
@@ -66,5 +66,11 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         gap: 10,
         marginBottom: 10,
-    }
+    },
+    backButton: {
+      position: 'absolute',
+      top: 70,
+      left: 20,
+      zIndex: 1,
+    },
     });

@@ -74,5 +74,11 @@ export const styles = StyleSheet.create({
       color: 'white',
       textDecorationLine: 'underline',
       fontSize: 16,
-    }
+    },
+    backButton: {
+      position: 'absolute',
+      top: 70,
+      left: 20,
+      zIndex: 1,
+    },
     });

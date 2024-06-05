@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { View, Image, Pressable, Modal, TouchableOpacity, Text, Animated, Dimensions } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faBars, faTimes, faChartLine, faClipboardList, faBullhorn, faPlug, faCog, faLightbulb, faSignOutAlt, faBell } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faTimes, faChartLine, faClipboardList, faBullhorn, faPlug, faCog, faLightbulb, faSignOutAlt, faUser } from '@fortawesome/free-solid-svg-icons';
 import { useNavigation } from '@react-navigation/native';
 import { styles } from '../styles/componentes/navbarPrincipalStyles';
 import logoModal from '../assets/logos/Logo1.png';
@@ -44,8 +44,8 @@ export default function Navbar ({ logoSource, showLinks }) {
           <FontAwesomeIcon icon={faBars} size={28} color="white" />
         </Pressable>
         <Image source={logoSource} style={styles.logo} />
-        <TouchableOpacity style={styles.bellIcon}>
-          <FontAwesomeIcon icon={faBell} size={30} color="white" />
+        <TouchableOpacity style={styles.bellIcon} onPress={() => navigation.navigate('PerfilUsuario')}>
+          <FontAwesomeIcon icon={faUser} size={30} color="white" />
         </TouchableOpacity>
       </View>
 

@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
     container: {
       flex: 1,
       alignItems: 'center',
-      paddingHorizontal: 20,
+      paddingHorizontal: 10,
     },
     containerTitle: {
       flex: 0.25,
@@ -25,7 +25,7 @@ export const styles = StyleSheet.create({
       color: 'white',
     },
     formContainer: {
-      width: '85%',
+      width: '90%',
     },
     inputContainer: {
       marginBottom: 20,
@@ -57,20 +57,20 @@ export const styles = StyleSheet.create({
     },
     texto: {
       color: 'white',
-      fontSize: 16,
+      fontSize: 12,
       marginTop: 10, 
       textAlign: 'center'
-    },
-
-    textoSenha: {
-      color: 'white',
-      fontSize: 14,
-      marginTop: 10, 
     },
     recomendacoes: {
         flexDirection: 'row',
         alignItems: 'center',
         gap: 10,
         marginBottom: 10,
-    }
+    },
+    backButton: {
+      position: 'absolute',
+      top: 70,
+      left: 20,
+      zIndex: 1,
+    },
     });

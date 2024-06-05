@@ -3,6 +3,7 @@ import { View, Text, TextInput, TouchableOpacity, ImageBackground, Switch, Alert
 import { useNavigation } from '@react-navigation/native';
 import { styles } from '../styles/telas/loginStyles';
 import axios from 'axios';
+import Icon from 'react-native-vector-icons/MaterialIcons'; 
 
 export default function Login() {
     const [email, setEmail] = useState('');
@@ -27,7 +28,7 @@ export default function Login() {
             const tipoUsuario = userData.tipo;
     
             if (tipoUsuario === 'usuario_comum') {
-                navigation.navigate('PrincipalUsuario');
+                navigation.navigate('PrincipalOngs');
             } else if (tipoUsuario === 'ong') {
                 navigation.navigate('PrincipalOngs');
             } else {
@@ -63,6 +64,9 @@ export default function Login() {
 
     return (
         <ImageBackground source={require('../assets/background/backgroundLogin.jpg')} style={styles.backgroundImage}>
+             <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+                <Icon name="arrow-back" size={30} color="#fff" />
+            </TouchableOpacity>
             <View style={styles.containerTitle}>
                 <Text style={styles.title}>Login</Text>
             </View>

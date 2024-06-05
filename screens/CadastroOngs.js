@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { View, Text, ScrollView, TextInput, TouchableOpacity, ImageBackground, ToastAndroid } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, ImageBackground, ToastAndroid } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { styles } from '../styles/telas/cadastroOngsStyles.js';
 import axios from 'axios';
+import Icon from 'react-native-vector-icons/MaterialIcons'; 
 
 export default function CadastroOngs() {
   const [ong, setOng] = useState('');
@@ -15,7 +16,7 @@ export default function CadastroOngs() {
 
   const api = axios.create({
     baseURL: "https://oceanovivo-41843-default-rtdb.firebaseio.com"
-  })
+  });
 
   const realizarCadastro = async () => {
     if (!validarEmail(email)) {
@@ -38,9 +39,9 @@ export default function CadastroOngs() {
         telefone,
         endereco,
         descricao,
-        senha, 
+        senha,
         aprovado: true,
-        tipo: 'ong' 
+        tipo: 'ong'
       });
 
       ToastAndroid.show('Formulário de cadastro enviado com sucesso!', ToastAndroid.SHORT);
@@ -80,9 +81,10 @@ export default function CadastroOngs() {
   };
 
   return (
-    <ScrollView>
-    <ImageBackground source={require('../assets/background/background2.jpg')} style={styles.backgroundImage}>
-      
+    <ImageBackground source={require('../assets/background/cadastroOngs.jpg')} style={styles.backgroundImage}>
+      <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+        <Icon name="arrow-back" size={30} color="#fff" />
+      </TouchableOpacity>
       <View style={styles.containerTitle}>
         <Text style={styles.title}>Realizar Cadastro</Text>
         <Text style={styles.texto}>Venha fazer parte do Oceano Vivo, realize o cadastro da sua ONG pelo formulário a seguir</Text>
@@ -119,7 +121,6 @@ export default function CadastroOngs() {
               keyboardType="phone-pad"
               maxLength={14}
             />
-            <Text style={styles.textoSenha}>Recomendamos fortemente adicionar um número de telefone. Isso ajudará a verificar sua conta e mantê-la segura. </Text>
           </View>
           <View style={styles.inputContainer}>
             <Text style={styles.label}>Endereço</Text>
@@ -156,8 +157,6 @@ export default function CadastroOngs() {
           </TouchableOpacity>
         </View>
       </View>
-      
     </ImageBackground>
-    </ScrollView>
   );
 }
