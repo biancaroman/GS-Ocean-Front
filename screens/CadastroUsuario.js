@@ -35,6 +35,7 @@ export default function CadastroUsuario() {
         nome,
         email,
         telefone,
+        senha, 
         tipo: 'usuario_comum' 
       });
       

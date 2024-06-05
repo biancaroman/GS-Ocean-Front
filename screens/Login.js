@@ -16,7 +16,7 @@ export default function Login() {
 
     const realizarLogin = async () => {
         try {
-            const response = await api.get(`/usuarios.json?orderBy="email"&equalTo="${email}"&limitToFirst=1`);
+            const response = await api.get(`/usuarios.json`);
             const data = response.data;
             if (!data) {
                 Alert.alert('Usuário não cadastrado');
@@ -89,7 +89,7 @@ export default function Login() {
                             secureTextEntry={true}
                         />
                     </View>
-                    <TouchableOpacity style={styles.loginButton} onPress={validarEmail}>
+                    <TouchableOpacity style={styles.loginButton} onPress={realizarLogin}>
                         <Text style={styles.loginButtonText}>Login</Text>
                     </TouchableOpacity>
                     <View style={styles.row}>

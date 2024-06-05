@@ -6,9 +6,9 @@ import { styles } from '../../styles/principalApp/principalOngsStyles';
 export default function PrincipaOngs() {
 
     const showLinks = {
-        identificarEspecies: true,
-        especiesAmeacadas: false,
-        geolocalizacao: false,
+        identificarEspecies: false,
+        especiesAmeacadas: true,
+        geolocalizacao: true,
         administração: false
     };
 

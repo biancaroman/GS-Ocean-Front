@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, ImageBackground, ToastAndroid } from 'react-native';
+import { View, Text, ScrollView, TextInput, TouchableOpacity, ImageBackground, ToastAndroid } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { styles } from '../styles/telas/cadastroOngsStyles.js';
 import axios from 'axios';
@@ -32,13 +32,14 @@ export default function CadastroOngs() {
     }
 
     try {
-      await api.post('/ongs.json', {
+      await api.post('/usuarios.json', {
         nome: ong,
         email,
         telefone,
         endereco,
         descricao,
-        aprovado: false,
+        senha, 
+        aprovado: true,
         tipo: 'ong' 
       });
 
@@ -79,7 +80,9 @@ export default function CadastroOngs() {
   };
 
   return (
+    <ScrollView>
     <ImageBackground source={require('../assets/background/background2.jpg')} style={styles.backgroundImage}>
+      
       <View style={styles.containerTitle}>
         <Text style={styles.title}>Realizar Cadastro</Text>
         <Text style={styles.texto}>Venha fazer parte do Oceano Vivo, realize o cadastro da sua ONG pelo formulário a seguir</Text>
@@ -153,6 +156,8 @@ export default function CadastroOngs() {
           </TouchableOpacity>
         </View>
       </View>
+      
     </ImageBackground>
+    </ScrollView>
   );
 }

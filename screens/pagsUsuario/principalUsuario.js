@@ -7,9 +7,9 @@ export default function PrincipalUsuario() {
 
     const showLinks = {
         identificarEspecies: true,
-        especiesAmeacadas: true,
+        especiesAmeacadas: false,
         geolocalizacao: true,
-        administração: true
+        administração: false
     };
 
     return (

@@ -6,10 +6,10 @@ import { styles } from '../../styles/principalApp/principalAdmStyles';
 export default function PrincipaAdm() {
 
     const showLinks = {
-        identificarEspecies: true,
+        identificarEspecies: false,
         especiesAmeacadas: false,
         geolocalizacao: false,
-        administração: false
+        administração: true
     };
 
     return (
