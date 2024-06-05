@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, ImageBackground, Switch, ToastAndroid } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, ImageBackground, Switch, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { styles } from '../styles/telas/loginStyles';
+import axios from 'axios';
 
 export default function Login() {
     const [email, setEmail] = useState('');
@@ -9,34 +10,37 @@ export default function Login() {
     const [lembrarSenha, setLembrarSenha] = useState(false);
     const navigation = useNavigation();
 
+    const api = axios.create({
+        baseURL: "https://oceanovivo-41843-default-rtdb.firebaseio.com"
+      })
+
     const realizarLogin = async () => {
         try {
-            const resposta = await fetch('https://048ed71d-0b9a-4df7-a77e-690e34981c6b-00-rcgu688ubyui.janeway.repl.co/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email, senha }),
-            });
-
-            const dados = await resposta.json();
-
-            if (resposta.ok) {
-                navigation.navigate('Principal');
+            const response = await api.get(`/usuarios.json?orderBy="email"&equalTo="${email}"&limitToFirst=1`);
+            const data = response.data;
+            if (!data) {
+                Alert.alert('Usuário não cadastrado');
+                return;
+            }
+            const userId = Object.keys(data)[0];
+            const userData = data[userId];
+            const tipoUsuario = userData.tipo;
+    
+            if (tipoUsuario === 'usuario_comum') {
+                navigation.navigate('PrincipalUsuario');
+            } else if (tipoUsuario === 'ong') {
+                navigation.navigate('PrincipalOngs');
             } else {
-                if (dados.mensagem === 'Usuário não encontrado') {
-                    ToastAndroid.show('Usuário não cadastrado', ToastAndroid.SHORT);
-                } else {
-                    ToastAndroid.show(dados.mensagem, ToastAndroid.SHORT);
-                }
+                Alert.alert('Usuário não cadastrado');
             }
         } catch (error) {
-            ToastAndroid.show('Erro ao realizar login', ToastAndroid.SHORT);
+            Alert.alert('Erro ao realizar login');
+            console.error(error);
         }
     };
 
     const handleCadastro = () => {
-        navigation.navigate('PrincipalUsuario');
+        navigation.navigate('Cadastro');
     };
 
     const esqueceuSenha = () => {
@@ -46,11 +50,7 @@ export default function Login() {
     const validarEmail = () => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
-            ToastAndroid.show('Por favor, insira um email vÃ¡lido.', ToastAndroid.SHORT);
-            return;
-        }
-        if (!validarSenha(senha)) {
-            ToastAndroid.show('A senha deve ter pelo menos 8 caracteres e conter pelo menos 1 nÃºmero.', ToastAndroid.SHORT);
+            Alert.alert('Por favor, insira um email válido.'); 
             return;
         }
         realizarLogin();

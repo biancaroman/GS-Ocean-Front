@@ -2,144 +2,132 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, ImageBackground, ToastAndroid } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { styles } from '../styles/telas/cadastrouserStyles.js';
-import { Entypo } from '@expo/vector-icons';
+import axios from 'axios';
 
 export default function CadastroUsuario() {
+  const [nome, setNome] = useState('');
+  const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
+  const [telefone, setTelefone] = useState('');
+  const navigation = useNavigation();
 
-    const [nome, setNome] = useState('');
-    const [email, setEmail] = useState('');
-    const [senha, setSenha] = useState('');
-    const [telefone, setTelefone] = useState('');
-    const navigation = useNavigation();
+  const api = axios.create({
+    baseURL: "https://oceanovivo-41843-default-rtdb.firebaseio.com"
+  })
+  
 
-    const realizarCadastro = async () => {
-        if (!validarEmail(email)) {
-            ToastAndroid.show('Por favor, insira um email válido.', ToastAndroid.SHORT);
-            return;
-        }
-        if (!validarSenha(senha)) {
-            ToastAndroid.show('A senha deve ter pelo menos 8 caracteres e conter pelo menos 1 número.', ToastAndroid.SHORT);
-            return;
-        }
-        if (!validarTelefone(telefone)) {
-            ToastAndroid.show('Por favor, insira um telefone no formato (DDD)XXXXX-XXXX.', ToastAndroid.SHORT);
-            return;
-        }
+  const realizarCadastro = async () => {
+    if (!validarEmail(email)) {
+      ToastAndroid.show('Por favor, insira um email válido.', ToastAndroid.SHORT);
+      return;
+    }
+    if (!validarSenha(senha)) {
+      ToastAndroid.show('A senha deve ter pelo menos 8 caracteres e conter pelo menos 1 número.', ToastAndroid.SHORT);
+      return;
+    }
+    if (!validarTelefone(telefone)) {
+      ToastAndroid.show('Por favor, insira um telefone no formato (DDD)XXXXX-XXXX.', ToastAndroid.SHORT);
+      return;
+    }
 
-        try {
-            const resposta = await fetch('https://048ed71d-0b9a-4df7-a77e-690e34981c6b-00-rcgu688ubyui.janeway.repl.co/registrar', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email, senha, telefone }),
-            });
+    try {
+      await api.post('/usuarios.json', {
+        nome,
+        email,
+        telefone,
+        tipo: 'usuario_comum' 
+      });
+      
+      ToastAndroid.show('Usuário cadastrado com sucesso!', ToastAndroid.SHORT);
+      navigation.navigate('Login');
+    } catch (error) {
+      ToastAndroid.show('Erro ao realizar cadastro', ToastAndroid.SHORT);
+      console.error(error);
+    }
+  };
 
-            const dados = await resposta.json();
+  const validarEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
 
-            if (resposta.ok) {
-                ToastAndroid.show('UsuÃ¡rio cadastrado com sucesso!', ToastAndroid.SHORT);
-                navigation.navigate('Login');
-            } else {
-                ToastAndroid.show(dados.message, ToastAndroid.SHORT);
-            }
-        } catch (error) {
-            ToastAndroid.show('Erro ao realizar cadastro', ToastAndroid.SHORT);
-        }
-    };
+  const validarSenha = (senha) => {
+    const senhaRegex = /^(?=.*[0-9]).{8,}$/;
+    return senhaRegex.test(senha);
+  };
 
-    const validarEmail = (email) => {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailRegex.test(email);
-    };
+  const validarTelefone = (telefone) => {
+    const telefoneRegex = /^\(\d{2}\)\d{5}-\d{4}$/;
+    return telefoneRegex.test(telefone);
+  };
 
-    const validarSenha = (senha) => {
-        const senhaRegex = /^(?=.*[0-9]).{8,}$/;
-        return senhaRegex.test(senha);
-    };
+  const formatarTelefone = (texto) => {
+    const limpo = texto.replace(/\D/g, '');
+    let formatado = limpo;
 
-    const validarTelefone = (telefone) => {
-        const telefoneRegex = /^\(\d{2}\)\d{5}-\d{4}$/;
-        return telefoneRegex.test(telefone);
-    };
+    if (limpo.length > 2) {
+      formatado = `(${limpo.slice(0, 2)})${limpo.slice(2)}`;
+    }
+    if (limpo.length > 7) {
+      formatado = `(${limpo.slice(0, 2)})${limpo.slice(2, 7)}-${limpo.slice(7, 11)}`;
+    }
+    setTelefone(formatado);
+  };
 
-    const formatarTelefone = (texto) => {
-        const limpo = texto.replace(/\D/g, '');
-        let formatado = limpo;
-
-        if (limpo.length > 2) {
-            formatado = `(${limpo.slice(0, 2)})${limpo.slice(2)}`;
-        }
-        if (limpo.length > 7) {
-            formatado = `(${limpo.slice(0, 2)})${limpo.slice(2, 7)}-${limpo.slice(7, 11)}`;
-        }
-        setTelefone(formatado);
-    };
-
-
-    return (
-        <ImageBackground source={require('../assets/background/backgroundCadastroUsuario.jpg')} style={styles.backgroundImage}>
-            <View style={styles.containerTitle}>
-                <Text style={styles.title}>Realizar Cadastro</Text>
-            </View>
-            <View style={styles.container}>
-                <View style={styles.formContainer}>
-                    <View style={styles.inputContainer}>
-                        <Text style={styles.label}>Nome Completo</Text>
-                        <TextInput
-                            style={styles.input}
-                            placeholder="Digite seu nome"
-                            value={nome}
-                            onChangeText={setNome}
-                        />
-                    </View>
-                    <View style={styles.inputContainer}>
-                        <Text style={styles.label}>Email</Text>
-                        <TextInput
-                            style={styles.input}
-                            placeholder="Digite seu email"
-                            value={email}
-                            onChangeText={setEmail}
-                            keyboardType="email-address"
-                            autoCapitalize="none"
-                        />
-                    </View>
-                    <View style={styles.inputContainer}>
-                        <Text style={styles.label}>Telefone</Text>
-                        <TextInput
-                            style={styles.input}
-                            placeholder="(DDD)XXXXX-XXXX"
-                            value={telefone}
-                            onChangeText={formatarTelefone}
-                            keyboardType="phone-pad"
-                            maxLength={14} 
-                        />
-                        <Text style={styles.texto}>Recomendamos fortemente adicionar um número de telefone. Isso ajudará a verificar sua conta e mante-la segura. </Text>
-                    </View>
-                    <View style={styles.inputContainer}>
-                        <Text style={styles.label}>Senha</Text>
-                        <TextInput
-                            style={styles.input}
-                            placeholder="Digite sua senha"
-                            value={senha}
-                            onChangeText={setSenha}
-                            secureTextEntry={true}
-                        />
-                    </View>
-                    <View style={styles.recomendacoes}>
-                        <Entypo name="controller-record" size={14} color="white" />
-                        <Text style={styles.marcadores}>Use 8 ou mais caracteres </Text>
-                    </View>
-                    <View style={styles.recomendacoes}>
-                        <Entypo name="controller-record" size={14} color="white" />
-                        <Text style={styles.marcadores}>Use um número (ex. 1234)</Text>
-                    </View>
-                    <TouchableOpacity style={styles.loginButton} onPress={realizarCadastro}>
-                        <Text style={styles.loginButtonText}>Cadastrar</Text>
-                    </TouchableOpacity>
-                   
-                </View>
-            </View>
-        </ImageBackground>
-    );
+  return (
+    <ImageBackground source={require('../assets/background/backgroundCadastroUsuario.jpg')} style={styles.backgroundImage}>
+      <View style={styles.containerTitle}>
+        <Text style={styles.title}>Realizar Cadastro</Text>
+      </View>
+      <View style={styles.container}>
+        <View style={styles.formContainer}>
+          <View style={styles.inputContainer}>
+            <Text style={styles.label}>Nome Completo</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Digite seu nome"
+              value={nome}
+              onChangeText={setNome}
+            />
+          </View>
+          <View style={styles.inputContainer}>
+            <Text style={styles.label}>Email</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Digite seu email"
+              value={email}
+              onChangeText={setEmail}
+              keyboardType="email-address"
+              autoCapitalize="none"
+            />
+          </View>
+          <View style={styles.inputContainer}>
+            <Text style={styles.label}>Telefone</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="(DDD)XXXXX-XXXX"
+              value={telefone}
+              onChangeText={formatarTelefone}
+              keyboardType="phone-pad"
+              maxLength={14}
+            />
+            <Text style={styles.texto}>Recomendamos fortemente adicionar um número de telefone. Isso ajudará a verificar sua conta e mantê-la segura. </Text>
+          </View>
+          <View style={styles.inputContainer}>
+            <Text style={styles.label}>Senha</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Digite sua senha"
+              value={senha}
+              onChangeText={setSenha}
+              secureTextEntry={true}
+            />
+          </View>
+          <TouchableOpacity style={styles.loginButton} onPress={realizarCadastro}>
+            <Text style={styles.loginButtonText}>Cadastrar</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </ImageBackground>
+  );
 }

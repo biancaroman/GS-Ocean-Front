@@ -1,14 +1,15 @@
 import React from 'react';
-import { View, Text, StyleSheet, ImageBackground } from 'react-native';
+import { View, Text, ImageBackground } from 'react-native';
 import Navbar from '../../components/NavBarPrincipal';
+import { styles } from '../../styles/principalApp/principalUsuarioStyles';
 
 export default function PrincipalUsuario() {
 
     const showLinks = {
         identificarEspecies: true,
-        especiesAmeacadas: false,
-        geolocalizacao: false,
-        administração: false
+        especiesAmeacadas: true,
+        geolocalizacao: true,
+        administração: true
     };
 
     return (
@@ -33,27 +34,3 @@ export default function PrincipalUsuario() {
     );
 }
 
-const styles = StyleSheet.create({
-    background: {
-        flex: 1,
-        
-    },
-    container: {
-        flex: 1,
-        padding: 20,
-
-        backgroundColor: 'rgba(0, 0, 0, 0.3)',
-        
-    },
-    title: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        marginBottom: 30,
-        color: 'white'
-    },
-    paragraph: {
-        fontSize: 16,
-        marginBottom: 50,
-        color: 'white'
-    },
-});
