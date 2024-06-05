@@ -28,7 +28,7 @@ export default function Login() {
             const tipoUsuario = userData.tipo;
     
             if (tipoUsuario === 'usuario_comum') {
-                navigation.navigate('PrincipalOngs');
+                navigation.navigate('PrincipalUsuario');
             } else if (tipoUsuario === 'ong') {
                 navigation.navigate('PrincipalOngs');
             } else {
