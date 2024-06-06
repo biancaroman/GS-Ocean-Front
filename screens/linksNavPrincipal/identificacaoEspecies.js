@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
-import { View, Text, Image, TouchableOpacity, Alert, StyleSheet } from 'react-native';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
 import NavbarSimples from '../../components/NavBarSimples';
-import axios from 'axios';
 import { styles } from '../../styles/linksNavPrincipal/identificacaoEspeciesStyles';
 
 export default function IdentificacaoEspecies() {
-  const [photo, setPhoto] = useState(null);
   const [result, setResult] = useState(null);
-  const [isIdentifying, setIsIdentifying] = useState(false);
   const [recentIdentifications, setRecentIdentifications] = useState([
     {
       id: 1,

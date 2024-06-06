@@ -1,8 +1,26 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import NavbarSimples from '../../components/NavBarSimples';
+import axios from 'axios'; 
+
 
 export default function Administracao(){
+
+  const api = axios.create({
+    baseURL: "https://oceanovivo-41843-default-rtdb.firebaseio.com"
+  });
+
+  const [ongs, setOngs] = useState({});
+
+  useEffect(() => {
+    api.get('/ongs.json')
+      .then(response => {
+        setOngs(response.data);
+      })
+      .catch(error => {
+        console.error('Erro ao obter lista de ONGs:', error);
+      });
+  }, []);
 
   const handleEditUser = (userId) => {
     alert(`Editar usuário com ID ${userId}`);
@@ -13,11 +31,26 @@ export default function Administracao(){
   }
 
   const handleApproveONG = (ongId) => {
-    alert(`Aprovar cadastro da ONG com ID ${ongId}`);
+    api.put(`/ongs/${ongId}.json`, { aprovado: true })
+      .then(response => {
+        alert(`ONG aprovada com sucesso!`);
+      })
+      .catch(error => {
+        alert(`Erro ao aprovar a ONG: ${error.message}`);
+      });
   }
 
   const handleRejectONG = (ongId) => {
-    alert(`Rejeitar cadastro da ONG com ID ${ongId}`);
+    api.delete(`/ongs/${ongId}.json`)
+      .then(response => {
+        const updatedOngs = { ...ongs };
+        delete updatedOngs[ongId];
+        setOngs(updatedOngs);
+        alert(`ONG rejeitada e removida com sucesso!`);
+      })
+      .catch(error => {
+        alert(`Erro ao rejeitar a ONG: ${error.message}`);
+      });
   }
 
   const handleEditSpecies = (speciesId) => {
@@ -39,6 +72,7 @@ export default function Administracao(){
   return (
     <View style={{flex:1}}> 
       <NavbarSimples logoSource={require('../../assets/logos/Logo2.png')} />
+      <ScrollView>
       <View style={styles.container}>
         <Text style={styles.heading}>Administração</Text>
         <Text style={styles.purpose}>Propósito: Gerenciar usuários, ONGs e dados do nosso sistema.</Text>
@@ -58,17 +92,19 @@ export default function Administracao(){
         </View>
         <View style={styles.section}>
           <Text style={styles.subheading}>Lista de novos cadastros de ONGs:</Text>
-          <View style={styles.itemContainer}>
-            <Text style={styles.listItem}>ONG 1</Text>
-            <View style={styles.buttonsContainer}>
-              <TouchableOpacity onPress={() => handleApproveONG(1)} style={styles.button}>
-                <Text style={styles.buttonText}>Aprovar</Text>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => handleRejectONG(1)} style={styles.button}>
-                <Text style={styles.buttonText}>Rejeitar</Text>
-              </TouchableOpacity>
+          {Object.keys(ongs).map(ongId => (
+            <View key={ongId} style={styles.itemContainer}>
+              <Text style={styles.listItem}>{ongs[ongId].nome}</Text>
+              <View style={styles.buttonsContainer}>
+                <TouchableOpacity onPress={() => handleApproveONG(ongId)} style={styles.button}>
+                  <Text style={styles.buttonText}>Aprovar</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => handleRejectONG(ongId)} style={styles.button}>
+                  <Text style={styles.buttonText}>Rejeitar</Text>
+                </TouchableOpacity>
+              </View>
             </View>
-          </View>
+          ))}
         </View>
         <View style={styles.section}>
           <Text style={styles.subheading}>Ferramentas para manter e atualizar o banco de dados:</Text>
@@ -117,59 +153,9 @@ export default function Administracao(){
             </View>    
           </View>
         </View>
-      </View>   
+      </View>  
+      </ScrollView> 
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-    backgroundColor: '#262250'
-  },
-  heading: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginBottom: 15,
-    color: 'white'
-  },
-  purpose: {
-    marginBottom: 10,
-    color: 'white'
-  },
-  section: {
-    marginBottom: 20,
-    padding: 20,
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-    borderRadius: 20
-  },
-  subheading: {
-    fontWeight: 'bold',
-    marginBottom: 15,
-    color: 'white'
-  },
-  listItem: {
-    marginLeft: 10,
-    marginBottom: 5,
-    color: 'rgba(255, 255, 255, 0.8)',
-  },
-  itemContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  buttonsContainer: {
-    flexDirection: 'row',
-  },
-  button: {
-    padding: 5,
-    borderRadius: 5,
-    borderWidth: 2,
-    marginLeft: 20,
-    marginBottom: 6
-  },
-  buttonText: {
-    color: 'white',
-  },
-});
