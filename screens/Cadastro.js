@@ -11,7 +11,7 @@ export default function Cadastro () {
     <View style={{ flex: 1 }}>
       <Navbar logoSource={require('../assets/logos/Logo1.png')} />
       <View style={styles.container}>
-        <Text style={styles.text}>Escolha a opção que você se encaixa</Text>
+        <Text style={styles.text}>Escolha a opção que melhor se{'\n'} adequa ao seu perfil para realizar {'\n'} o seu cadastro</Text>
         
         <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('CadastroOngs')}>
           <ImageBackground source={require('../assets/background/backgroundCadastroUsuario.jpg')} style={styles.imageBackground}>

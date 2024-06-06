@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
     },
     text: {
       fontWeight: 'bold',
-      fontSize: 20,
+      fontSize: 18,
       marginBottom: 20,
       textAlign: 'center'
     },

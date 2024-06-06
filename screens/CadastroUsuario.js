@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, ImageBackground, ToastAndroid } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, ImageBackground, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { styles } from '../styles/telas/cadastrouserStyles.js';
 import axios from 'axios';
@@ -19,15 +19,15 @@ export default function CadastroUsuario() {
 
   const realizarCadastro = async () => {
     if (!validarEmail(email)) {
-      ToastAndroid.show('Por favor, insira um email válido.', ToastAndroid.SHORT);
+      Alert.alert('Por favor, insira um email válido.');
       return;
     }
     if (!validarSenha(senha)) {
-      ToastAndroid.show('A senha deve ter pelo menos 8 caracteres e conter pelo menos 1 número.', ToastAndroid.SHORT);
+      Alert.alert('A senha deve ter pelo menos 8 caracteres e conter pelo menos 1 número.');
       return;
     }
     if (!validarTelefone(telefone)) {
-      ToastAndroid.show('Por favor, insira um telefone no formato (DDD)XXXXX-XXXX.', ToastAndroid.SHORT);
+      Alert.alert('Por favor, insira um telefone no formato (DDD)XXXXX-XXXX.');
       return;
     }
 
@@ -40,10 +40,10 @@ export default function CadastroUsuario() {
         tipo: 'usuario_comum' 
       });
       
-      ToastAndroid.show('Usuário cadastrado com sucesso!', ToastAndroid.SHORT);
+      Alert.alert('Usuário cadastrado com sucesso!');
       navigation.navigate('Login');
     } catch (error) {
-      ToastAndroid.show('Erro ao realizar cadastro', ToastAndroid.SHORT);
+      Alert.alert('Erro ao realizar cadastro');
       console.error(error);
     }
   };

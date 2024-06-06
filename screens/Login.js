@@ -3,7 +3,7 @@ import { View, Text, TextInput, TouchableOpacity, ImageBackground, Switch, Alert
 import { useNavigation } from '@react-navigation/native';
 import { styles } from '../styles/telas/loginStyles';
 import axios from 'axios';
-import Icon from 'react-native-vector-icons/MaterialIcons'; 
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export default function Login() {
     const [email, setEmail] = useState('');
@@ -13,32 +13,57 @@ export default function Login() {
 
     const api = axios.create({
         baseURL: "https://oceanovivo-41843-default-rtdb.firebaseio.com"
-      })
+    });
 
     const realizarLogin = async () => {
         try {
             const response = await api.get(`/usuarios.json`);
             const data = response.data;
+    
             if (!data) {
                 Alert.alert('Usuário não cadastrado');
                 return;
             }
-            const userId = Object.keys(data)[0];
-            const userData = data[userId];
-            const tipoUsuario = userData.tipo;
     
-            if (tipoUsuario === 'usuario_comum') {
-                navigation.navigate('PrincipalUsuario');
-            } else if (tipoUsuario === 'ong') {
-                navigation.navigate('PrincipalOngs');
-            } else {
+            let usuarioEncontrado = null;
+            let senhaCorreta = false;
+            for (let id in data) {
+                const usuario = data[id];
+                if (usuario.email === email) {
+                    usuarioEncontrado = usuario;
+                    if (usuario.senha === senha) {
+                        senhaCorreta = true;
+                    }
+                    break;
+                }
+            }
+    
+            if (!usuarioEncontrado) {
                 Alert.alert('Usuário não cadastrado');
+                return;
+            }
+    
+            if (!senhaCorreta) {
+                Alert.alert('Senha incorreta');
+                return;
+            }
+    
+            const tipoUsuario = usuarioEncontrado.tipo;
+            if (tipoUsuario === 'usuario_comum') {
+                navigation.navigate('PrincipalUsuario', { usuario: usuarioEncontrado });
+            } else if (tipoUsuario === 'ong') {
+                navigation.navigate('PrincipalOngs', { usuario: usuarioEncontrado });
+            } else if (tipoUsuario === 'administrador') {
+                navigation.navigate('PrincipalAdm', { usuario: usuarioEncontrado });
+            } else {
+                Alert.alert('Tipo de usuário desconhecido');
             }
         } catch (error) {
             Alert.alert('Erro ao realizar login');
             console.error(error);
         }
     };
+    
 
     const handleCadastro = () => {
         navigation.navigate('Cadastro');
@@ -48,13 +73,9 @@ export default function Login() {
         navigation.navigate('Senha');
     };
 
-    const validarEmail = () => {
+    const validarEmail = (email) => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            Alert.alert('Por favor, insira um email válido.'); 
-            return;
-        }
-        realizarLogin();
+        return emailRegex.test(email);
     };
 
     const validarSenha = (senha) => {
@@ -62,9 +83,21 @@ export default function Login() {
         return senhaRegex.test(senha);
     };
 
+    const handleLogin = () => {
+        if (!validarEmail(email)) {
+            Alert.alert('Por favor, insira um email válido.');
+            return;
+        }
+        if (!validarSenha(senha)) {
+            Alert.alert('A senha deve ter pelo menos 8 caracteres e conter pelo menos um número.');
+            return;
+        }
+        realizarLogin();
+    };
+
     return (
         <ImageBackground source={require('../assets/background/backgroundLogin.jpg')} style={styles.backgroundImage}>
-             <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+            <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
                 <Icon name="arrow-back" size={30} color="#fff" />
             </TouchableOpacity>
             <View style={styles.containerTitle}>
@@ -93,7 +126,7 @@ export default function Login() {
                             secureTextEntry={true}
                         />
                     </View>
-                    <TouchableOpacity style={styles.loginButton} onPress={realizarLogin}>
+                    <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
                         <Text style={styles.loginButtonText}>Login</Text>
                     </TouchableOpacity>
                     <View style={styles.row}>
