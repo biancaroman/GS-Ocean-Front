@@ -2,7 +2,8 @@
 
 A aplicação possui diversos endpoints para realizar operações de cadastro, login e gerenciamento de usuários e ONGs.
 
-## Cadastro de ONGs e Usuários (Endpoints utilizados na página CadastroOngs.js e CadastroUsuario.js)
+## Cadastro de ONGs e Usuários 
+## (Endpoints utilizados na página CadastroOngs.js e CadastroUsuario.js)
 
 ### POST /usuarios.json
 
