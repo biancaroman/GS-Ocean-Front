@@ -21,14 +21,14 @@ Firebase Realtime Database: Utilizado para testes das requisições.
 ### 🖥️ Ambientes de Desenvolvimento Integrado (IDEs):
 ![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white)
 
-## 🎯 Objetivos
+## ✅ Objetivos
 - Identificação Automática de Espécies: Utilizar técnicas de aprendizado de máquina e a tecnologia YOLO para reconhecer e identificar automaticamente diversas espécies marinhas.
 - Monitoramento de Espécies Ameaçadas: Facilitar o monitoramento de espécies marinhas em risco de extinção, permitindo a implementação de medidas de conservação mais eficazes.
 - Controle de Espécies Invasoras: Identificar rapidamente espécies invasoras que possam comprometer a integridade dos ecossistemas marinhos.
 - Geração de Relatórios: Automatizar a geração de relatórios detalhados sobre a biodiversidade marinha, que podem ser enviados para ONGs e outras organizações envolvidas na preservação ambiental.
 - Promoção da Sustentabilidade: Contribuir para a gestão sustentável dos ecossistemas oceânicos, através de uma ferramenta que melhora a precisão e eficiência do monitoramento marinho.
 
-🌟 Benefícios
+## 🌟 Benefícios
 - Reação Rápida a Ameaças: A identificação automática de espécies invasoras e a monitorização de espécies ameaçadas permitem uma resposta rápida e eficaz, evitando danos irreversíveis aos ecossistemas marinhos.
 - Conservação Proativa: Com dados precisos e em tempo real sobre a biodiversidade marinha, as ONGs e outras organizações de conservação podem implementar estratégias proativas para proteger espécies vulneráveis e habitats críticos.
 - Educação e Sensibilização: Os relatórios gerados pelo sistema podem ser utilizados para informar sobre a importância da conservação dos oceanos e as ações necessárias para protegê-los. Isso aumenta a conscientização e o apoio público para as iniciativas de conservação.
