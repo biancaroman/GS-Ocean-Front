@@ -10,10 +10,12 @@ As seguintes ferramentas foram usadas neste projeto:
 
 ### 📱 Plataforma de Desenvolvimento
 React Native: Utilizado para o desenvolvimento do aplicativo móvel.
+
 ![React Native](https://img.shields.io/badge/react_native-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
 
 ### 🌐 Banco de Dados
 Firebase Realtime Database: Utilizado para testes das requisições.
+
 ![Firebase](https://img.shields.io/badge/firebase-a08021?style=for-the-badge&logo=firebase&logoColor=ffcd34)
 
 ### 🖥️ Ambientes de Desenvolvimento Integrado (IDEs):
