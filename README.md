@@ -1,4 +1,6 @@
-# Oceano Vivo
+# 🐟 Oceano Vivo 🌊
+
+> Repositório do Aplicativo Mobile: tecnologia a serviço da preservação dos oceanos.
 
 ## 📌 Descrição
 
@@ -43,9 +45,24 @@ O projeto "OceanoVivo" foi desenvolvido principalmente para atender às necessid
 - Comunidades Costeiras e Pescadores: Obter informações sobre a presença de espécies invasoras e mudanças populacionais, promovendo práticas de pesca sustentável.
 
 
-### 🤝 Colaboradores
+## 🫂 Integrantes
 
-Queremos agradecer às seguintes pessoas que contribuíram para este projeto:
+Aqui estão os membros do grupo que participaram durante desenvolvimento desta GS.
+
+* **RM 552267 - Bianca Leticia Román Caldeira**
+  - Turma: 2TDSPH
+    
+* **RM 552252 – Charlene Aparecida Estevam Mendes Fialho**
+  - Turma: 2TDSPH
+
+* **RM 552258 - Laís Alves da Silva Cruz**
+  - Turma: 2TDSPH
+
+* **RM 99675 – Lucca Raphael Pereira dos Santos**
+  - Turma: 2TDSPW
+
+* **RM 97916 – Fabricio Torres Antonio**
+  - Turma: 2TDSPH
 
 <table>
   <tr>
