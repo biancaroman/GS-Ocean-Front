@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import NavbarSimples from '../../components/NavBarSimples';
 import axios from 'axios'; 
+import { styles } from '../../styles/linksNavPrincipal/administracaoStyles';
 
 
 export default function Administracao(){
