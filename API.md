@@ -107,6 +107,18 @@ Retorno:
 
 ## Administrador (Endpoints utilizados na página Administracao.js)
 
+Para a tela de Administradores temos um login fixo: 
+```json
+{
+  "adm": {
+    "email": "admin1@gmail.com",
+    "nome": "Administrador Um",
+    "senha": "admin1234",
+    "tipo": "adm"
+  }
+}
+```
+
 ### GET /ongs.json
 
 Este endpoint é utilizado para obter a lista de ONGs cadastradas no sistema. A resposta é similar ao endpoint de usuários, mas com informações específicas das ONGs, como nome, email, telefone, endereço, descrição e se foi aprovada.
